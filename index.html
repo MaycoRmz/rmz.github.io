@@ -41,11 +41,16 @@
             background-size: 20px 20px;
             opacity: 0.1;
         }
-        h1, h4 {
+        h1, h4 {  /* Added h4 to match h1 styling */
             margin: 0;
             font-size: 2.8em;
             letter-spacing: 2px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            color: #36454F;
+            border-bottom: 3px solid #36454F;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            position: relative;
         }
         h4::after {  /* Added the blue underline effect */
             content: '';
@@ -174,7 +179,7 @@
             .section {
                 padding: 20px;
             }
-            h1, h4 {
+            h1, h4 {  /* Updated to include h4 in media query */
                 font-size: 2em;
             }
         }
