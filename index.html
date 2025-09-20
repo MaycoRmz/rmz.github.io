@@ -1,214 +1,789 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Miguel G. Ramirez - Warehouse & Logistics Operations Leader</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary-blue: #2563eb;
+      --secondary-blue: #3b82f6;
+      --dark-blue: #1e40af;
+      --light-blue: #dbeafe;
+      --accent-cyan: #06b6d4;
+      --text-dark: #1e293b;
+      --text-medium: #475569;
+      --text-light: #64748b;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f5f7fa;
-      color: #333;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-secondary);
+      color: var(--text-dark);
       line-height: 1.6;
-      margin: 0;
-      padding: 20px;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
     }
+
+    /* Animated background */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.03;
+      pointer-events: none;
+    }
+
+    .floating-shapes {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .shape {
+      position: absolute;
+      background: var(--primary-blue);
+      border-radius: 50%;
+      animation: float 20s infinite linear;
+    }
+
+    .shape:nth-child(1) { width: 80px; height: 80px; left: 10%; animation-delay: 0s; }
+    .shape:nth-child(2) { width: 120px; height: 120px; left: 20%; animation-delay: -5s; }
+    .shape:nth-child(3) { width: 60px; height: 60px; left: 70%; animation-delay: -10s; }
+    .shape:nth-child(4) { width: 100px; height: 100px; left: 80%; animation-delay: -15s; }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+    }
+
     .container {
-      max-width: 900px;
-      margin: auto;
-      background: #fff;
-      padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 6px 25px rgba(0,0,0,0.1);
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      position: relative;
+      z-index: 1;
     }
-    header {
+
+    /* Header Section */
+    .header {
+      background: var(--bg-primary);
+      border-radius: 24px;
+      padding: 3rem 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+      animation: slideInFromTop 1s ease-out;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: var(--bg-gradient);
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { transform: translateX(-100%); }
+      50% { transform: translateX(100%); }
+    }
+
+    .header-content {
       text-align: center;
-      margin-bottom: 30px;
+      position: relative;
+      z-index: 2;
     }
-    header h1 {
-      margin: 0;
-      font-size: 2.4em;
-      color: #1a2a3a;
+
+    .name {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+      background: var(--bg-gradient);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: textGlow 2s ease-in-out infinite alternate;
     }
-    header h2 {
-      margin: 5px 0 15px;
-      font-size: 1.2em;
-      font-weight: 400;
-      color: #4a90e2;
+
+    @keyframes textGlow {
+      from { filter: brightness(1); }
+      to { filter: brightness(1.2); }
     }
-    .contact {
-      font-size: 0.95em;
-      color: #444;
+
+    .title {
+      font-size: clamp(1.2rem, 3vw, 1.5rem);
+      font-weight: 500;
+      color: var(--text-medium);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: slideInFromBottom 1s ease-out 0.3s forwards;
     }
-    h3 {
-      color: #1a2a3a;
-      border-bottom: 2px solid #4a90e2;
-      padding-bottom: 6px;
-      margin-top: 30px;
+
+    .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      font-size: 0.95rem;
+      color: var(--text-medium);
+      opacity: 0;
+      animation: slideInFromBottom 1s ease-out 0.6s forwards;
     }
-    .section p, .section ul {
-      margin: 10px 0;
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
     }
-    ul {
-      padding-left: 20px;
+
+    .contact-item:hover {
+      color: var(--primary-blue);
+      transform: translateY(-2px);
     }
-    ul li {
-      margin-bottom: 6px;
-    }
-    .job {
-      margin-bottom: 20px;
-    }
-    .job-title {
-      font-weight: bold;
-      color: #1a2a3a;
-    }
-    .job-period {
-      font-style: italic;
-      color: #555;
-    }
-    .print-btn {
-      display: inline-block;
-      background: #4a90e2;
-      color: white;
-      padding: 10px 18px;
-      border-radius: 6px;
+
+    .contact-item a {
+      color: inherit;
       text-decoration: none;
-      font-size: 0.95em;
-      transition: 0.2s;
+      transition: all 0.3s ease;
     }
-    .print-btn:hover {
-      background: #357abd;
+
+    .contact-item a:hover {
+      color: var(--primary-blue);
     }
+
+    /* Action Buttons */
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+      opacity: 0;
+      animation: slideInFromBottom 1s ease-out 0.9s forwards;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--primary-blue);
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-xl);
+      background: var(--dark-blue);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--primary-blue);
+      border: 2px solid var(--primary-blue);
+    }
+
+    .btn-secondary:hover {
+      background: var(--primary-blue);
+      color: white;
+    }
+
+    /* Main Content */
+    .main-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .section {
+      background: var(--bg-primary);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideInFromBottom 1s ease-out forwards;
+    }
+
+    .section:nth-child(odd) { animation-delay: 0.2s; }
+    .section:nth-child(even) { animation-delay: 0.4s; }
+
+    .section:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--bg-gradient);
+      border-radius: 2px;
+      animation: expandWidth 1s ease-out 1.5s;
+    }
+
+    @keyframes expandWidth {
+      from { width: 0; }
+      to { width: 60px; }
+    }
+
+    /* Full Width Sections */
+    .full-width {
+      grid-column: 1 / -1;
+    }
+
+    /* Experience Section */
+    .job {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      border-radius: 16px;
+      background: var(--bg-secondary);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .job::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: var(--bg-gradient);
+      transform: scaleY(0);
+      animation: scaleY 0.5s ease-out 2s forwards;
+    }
+
+    @keyframes scaleY {
+      to { transform: scaleY(1); }
+    }
+
+    .job:hover {
+      transform: translateX(8px);
+      background: white;
+      box-shadow: var(--shadow-md);
+    }
+
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .job-title {
+      font-weight: 600;
+      color: var(--text-dark);
+      font-size: 1.1rem;
+      flex: 1;
+    }
+
+    .job-period {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      font-weight: 500;
+      background: var(--light-blue);
+      padding: 0.25rem 0.75rem;
+      border-radius: 8px;
+    }
+
+    .job ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .job li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-medium);
+      transition: all 0.3s ease;
+    }
+
+    .job li::before {
+      content: '▶';
+      position: absolute;
+      left: 0;
+      color: var(--accent-cyan);
+      font-size: 0.8rem;
+      transition: all 0.3s ease;
+    }
+
+    .job:hover li::before {
+      color: var(--primary-blue);
+      transform: translateX(4px);
+    }
+
+    /* Skills and Competencies */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .skill-item {
+      background: var(--bg-secondary);
+      padding: 1rem;
+      border-radius: 12px;
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.1), transparent);
+      transition: left 0.5s;
+    }
+
+    .skill-item:hover::before {
+      left: 100%;
+    }
+
+    .skill-item:hover {
+      transform: translateY(-3px);
+      background: white;
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Certifications */
+    .cert-item {
+      background: var(--bg-secondary);
+      padding: 1.5rem;
+      border-radius: 16px;
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+      border-left: 4px solid var(--accent-cyan);
+    }
+
+    .cert-item:hover {
+      transform: translateX(8px);
+      background: white;
+      box-shadow: var(--shadow-md);
+      border-left-color: var(--primary-blue);
+    }
+
+    .cert-title {
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .cert-details {
+      font-size: 0.9rem;
+      color: var(--text-medium);
+      line-height: 1.5;
+    }
+
+    /* Animations */
+    @keyframes slideInFromTop {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInFromBottom {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+
+      .header {
+        padding: 2rem 1.5rem;
+      }
+
+      .main-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .contact-info {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .actions {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .job-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .section {
+        padding: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header {
+        padding: 1.5rem 1rem;
+      }
+
+      .section {
+        padding: 1rem;
+      }
+    }
+
+    /* Print Styles */
     @media print {
       body {
         background: white;
       }
-      .container {
-        box-shadow: none;
-        border-radius: 0;
-      }
-      .print-btn {
+
+      .bg-animation,
+      .floating-shapes {
         display: none;
       }
+
+      .container {
+        max-width: none;
+        padding: 0;
+      }
+
+      .section {
+        box-shadow: none;
+        border: 1px solid #e5e7eb;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .actions {
+        display: none;
+      }
+
+      .header::before {
+        display: none;
+      }
+
+      .main-content {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+    }
+
+    /* Dark mode support */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text-dark: #f1f5f9;
+        --text-medium: #cbd5e1;
+        --text-light: #94a3b8;
+        --bg-primary: #1e293b;
+        --bg-secondary: #0f172a;
+      }
+    }
+
+    /* Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+
+      .bg-animation {
+        display: none;
+      }
+    }
+
+    /* Focus states for accessibility */
+    .btn:focus,
+    .contact-item a:focus {
+      outline: 2px solid var(--primary-blue);
+      outline-offset: 2px;
+      border-radius: 8px;
     }
   </style>
 </head>
 <body>
+  <!-- Animated background -->
+  <div class="bg-animation">
+    <div class="floating-shapes">
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+    </div>
+  </div>
+
   <div class="container">
-    <header>
-      <h1>Miguel G. Ramirez</h1>
-  <h2>Warehouse & Logistics Operations Leader | Driving Efficiency, Safety & Team Performance</h2>
-  <p class="contact">
-    Arkadelphia, AR <br/>
-    mayco.rmz@gmail.com | 719.691.8355 <br/>
-    <a href="https://www.linkedin.com/in/miguel-ramirez-b49519107" target="_blank">LinkedIn</a>
-      </p>
+    <!-- Header Section -->
+    <header class="header">
+      <div class="header-content">
+        <h1 class="name">Miguel G. Ramirez</h1>
+        <h2 class="title">Warehouse & Logistics Operations Leader | Driving Efficiency, Safety & Team Performance</h2>
+        
+        <div class="contact-info">
+          <div class="contact-item">
+            <span>📍</span>
+            <span>Arkadelphia, AR</span>
+          </div>
+          <div class="contact-item">
+            <span>📧</span>
+            <a href="mailto:mayco.rmz@gmail.com">mayco.rmz@gmail.com</a>
+          </div>
+          <div class="contact-item">
+            <span>📱</span>
+            <a href="tel:7196918355">719.691.8355</a>
+          </div>
+          <div class="contact-item">
+            <span>💼</span>
+            <a href="https://www.linkedin.com/in/miguel-ramirez-b49519107" target="_blank" rel="noopener noreferrer">LinkedIn Profile</a>
+          </div>
+        </div>
+
+        <div class="actions">
+          <a href="#" class="btn" onclick="window.print(); return false;">
+            <span>🖨️</span>
+            <span>Print / Save PDF</span>
+          </a>
+          <a href="mailto:mayco.rmz@gmail.com" class="btn btn-secondary">
+            <span>✉️</span>
+            <span>Contact Me</span>
+          </a>
+        </div>
+      </div>
     </header>
 
-    <a href="#" class="print-btn" onclick="window.print()">🖨️ Print / Save as PDF</a>
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Executive Profile -->
+      <section class="section full-width">
+        <h3 class="section-title">Executive Profile</h3>
+        <p>Results-driven warehouse and logistics leader with 10+ years of experience optimizing shipping, receiving, and distribution operations in high-volume, food-grade environments. Proven track record of managing teams of 50+, overseeing $20M+ in inventory, and delivering measurable gains in efficiency, cost control, and safety compliance. Skilled in ERP/WMS systems (SAP, Oracle, Red Prairie) and adept at leading process improvements that drive throughput, reduce waste, and strengthen team performance.</p>
+      </section>
 
-    <div class="section">
-      <h3>EXECUTIVE PROFILE</h3>
-      <p>
-        Results-driven warehouse and logistics leader with 10+ years of experience optimizing shipping,
-        receiving, and distribution operations in high-volume, food-grade environments. Proven track record of
-        managing teams of 50+, overseeing $20M+ in inventory, and delivering measurable gains in efficiency,
-        cost control, and safety compliance. Skilled in ERP/WMS systems (SAP, Oracle, Red Prairie) and adept
-        at leading process improvements that drive throughput, reduce waste, and strengthen team performance.
-      </p>
-    </div>
+      <!-- Core Competencies -->
+      <section class="section">
+        <h3 class="section-title">Core Competencies</h3>
+        <div class="skills-grid">
+          <div class="skill-item">Warehouse & DC Operations</div>
+          <div class="skill-item">Team Leadership</div>
+          <div class="skill-item">Supply Chain Optimization</div>
+          <div class="skill-item">Inventory Control</div>
+          <div class="skill-item">Process Improvement</div>
+          <div class="skill-item">Safety & Compliance</div>
+          <div class="skill-item">Budget & Cost Control</div>
+          <div class="skill-item">KPI Development</div>
+          <div class="skill-item">ERP/WMS Systems</div>
+        </div>
+      </section>
 
-    <div class="section">
-      <h3>CORE COMPETENCIES</h3>
-      <p>
-        Warehouse & DC Operations Management | Team Leadership & Development | Supply Chain & Logistics Optimization |
-        Inventory Control & WMS Systems | Process Improvement & Lean Practices | Safety & Compliance Management |
-        Budget & Cost Control | KPI Development & Analysis | ERP/WMS Platforms (SAP, Oracle, Red Prairie)
-      </p>
-    </div>
+      <!-- Technical Skills -->
+      <section class="section">
+        <h3 class="section-title">Technical Skills</h3>
+        <div class="skills-grid">
+          <div class="skill-item">SAP</div>
+          <div class="skill-item">Oracle</div>
+          <div class="skill-item">Red Prairie</div>
+          <div class="skill-item">Carlisle Systems</div>
+          <div class="skill-item">MS Office Suite</div>
+          <div class="skill-item">TMS</div>
+          <div class="skill-item">Quality Control Systems</div>
+        </div>
+      </section>
+    </main>
 
-    <div class="section">
-      <h3>PROFESSIONAL EXPERIENCE</h3>
+    <!-- Professional Experience -->
+    <section class="section full-width">
+      <h3 class="section-title">Professional Experience</h3>
 
       <div class="job">
-        <p class="job-title">Assistant Shipping & Receiving Manager | Hostess Brands – Arkansas</p>
-        <p class="job-period">Aug 2023 – Present</p>
+        <div class="job-header">
+          <div class="job-title">Assistant Shipping & Receiving Manager | Hostess Brands – Arkansas</div>
+          <div class="job-period">Aug 2023 – Present</div>
+        </div>
         <ul>
-          <li>Lead daily shipping and receiving operations, ensuring efficient material flow and inventory accuracy.</li>
-          <li>Supervise and develop a team, redesigned warehouse layout (+15% capacity, -20% pick time).</li>
-          <li>Enforced safety compliance and partnered with production to prevent shortages.</li>
+          <li>Lead daily shipping and receiving operations, ensuring efficient material flow and inventory accuracy</li>
+          <li>Supervise and develop a team, redesigned warehouse layout (+15% capacity, -20% pick time)</li>
+          <li>Enforced safety compliance and partnered with production to prevent shortages</li>
         </ul>
       </div>
 
       <div class="job">
-        <p class="job-title">Corporate IT Analyst II, Beef/Pork Division | JBS Food – Greeley, CO</p>
-        <p class="job-period">Nov 2021 – Aug 2023</p>
+        <div class="job-header">
+          <div class="job-title">Corporate IT Analyst II, Beef/Pork Division | JBS Food – Greeley, CO</div>
+          <div class="job-period">Nov 2021 – Aug 2023</div>
+        </div>
         <ul>
-          <li>Designed and implemented supply chain process improvements, reducing errors by 25%.</li>
-          <li>Trained staff on new workflows and monitored KPIs for effectiveness.</li>
+          <li>Designed and implemented supply chain process improvements, reducing errors by 25%</li>
+          <li>Trained staff on new workflows and monitored KPIs for effectiveness</li>
         </ul>
       </div>
 
       <div class="job">
-        <p class="job-title">Shipping General Foreman | JBS Food – Louisville, KY</p>
-        <p class="job-period">Jun 2020 – Nov 2021</p>
+        <div class="job-header">
+          <div class="job-title">Shipping General Foreman | JBS Food – Louisville, KY</div>
+          <div class="job-period">Jun 2020 – Nov 2021</div>
+        </div>
         <ul>
-          <li>Managed transportation operations, coordinated schedules, and led value-added processing teams.</li>
-          <li>Maintained safety and quality compliance across operations.</li>
+          <li>Managed transportation operations, coordinated schedules, and led value-added processing teams</li>
+          <li>Maintained safety and quality compliance across operations</li>
         </ul>
       </div>
 
       <div class="job">
-        <p class="job-title">Shipping Supervisor | JBS Food – Louisville, KY</p>
-        <p class="job-period">Dec 2018 – Jun 2020</p>
+        <div class="job-header">
+          <div class="job-title">Shipping Supervisor | JBS Food – Louisville, KY</div>
+          <div class="job-period">Dec 2018 – Jun 2020</div>
+        </div>
         <ul>
-          <li>Oversaw loading operations, improved throughput, and mentored a 23-person team.</li>
-          <li>Reduced staff turnover by 15% through coaching and engagement.</li>
+          <li>Oversaw loading operations, improved throughput, and mentored a 23-person team</li>
+          <li>Reduced staff turnover by 15% through coaching and engagement</li>
         </ul>
       </div>
 
       <div class="job">
-        <p class="job-title">Shipping Load Controller / Trainer / Inventory Control | Seaboard Foods – Guymon, OK</p>
-        <p class="job-period">Jan 2015 – Dec 2018</p>
+        <div class="job-header">
+          <div class="job-title">Shipping Load Controller / Trainer / Inventory Control | Seaboard Foods – Guymon, OK</div>
+          <div class="job-period">Jan 2015 – Dec 2018</div>
+        </div>
         <ul>
-          <li>Developed training programs and improved inventory accuracy with cycle counts.</li>
-          <li>Addressed process gaps to improve safety and productivity.</li>
+          <li>Developed training programs and improved inventory accuracy with cycle counts</li>
+          <li>Addressed process gaps to improve safety and productivity</li>
         </ul>
       </div>
 
-      <p>Previous roles included Logistics Coordinator, Management Support/Trainer, Quality Control Technician, Equipment Operator, Traffic Controller, and Crew Leader across companies like ABENGOA Bioenergy, National Beef, ABRA Auto Body & Glass, Sampson Construction, JBS/Swift, and Austin Co.</p>
-    </div>
+      <p><strong>Previous Experience:</strong> Logistics Coordinator, Management Support/Trainer, Quality Control Technician, Equipment Operator, Traffic Controller, and Crew Leader across companies like ABENGOA Bioenergy, National Beef, ABRA Auto Body & Glass, Sampson Construction, JBS/Swift, and Austin Co.</p>
+    </section>
 
-    <div class="section">
-      <h3>CERTIFICATIONS</h3>
-      <ul>
-        <li><strong>Yard-Truck Train-the-Trainer (OSHA CFR 1910.178)</strong><br/>
-          Arkansas State University Three Rivers — Issued 06/04/2025<br/>
+    <!-- Certifications -->
+    <section class="section full-width">
+      <h3 class="section-title">Certifications</h3>
+      
+      <div class="cert-item">
+        <div class="cert-title">Yard-Truck Train-the-Trainer (OSHA CFR 1910.178)</div>
+        <div class="cert-details">
+          Arkansas State University Three Rivers — Issued 06/04/2025<br>
           Certificate ID: 060425003
-        </li>
-        <li><strong>Forklift Train-the-Trainer Safety Program (Class 1–5)</strong><br/>
+        </div>
+      </div>
+
+      <div class="cert-item">
+        <div class="cert-title">Forklift Train-the-Trainer Safety Program (Class 1–5)</div>
+        <div class="cert-details">
           National Lift of Arkansas — Awarded 09/02/2023
-        </li>
-        <li><strong>FSPCA Preventive Controls for Human Food</strong><br/>
-          Food Safety Preventive Controls Alliance (FSPCA) — Completed 07/27/2023<br/>
+        </div>
+      </div>
+
+      <div class="cert-item">
+        <div class="cert-title">FSPCA Preventive Controls for Human Food</div>
+        <div class="cert-details">
+          Food Safety Preventive Controls Alliance (FSPCA) — Completed 07/27/2023<br>
           Certificate ID: 2ac6b6c3
-        </li>
-        <li><strong>HACCP / Food Safety Programs</strong></li>
-          Completed 07/27/2023<br/>
-      </ul>
-    </div>
+        </div>
+      </div>
 
-    <div class="section">
-      <h3>TECHNICAL SKILLS</h3>
-      <p>
-        ERP/WMS: SAP, Oracle, Red Prairie, Carlisle Systems | MS Office Suite | TMS | Quality Control Systems
-      </p>
-    </div>
+      <div class="cert-item">
+        <div class="cert-title">HACCP / Food Safety Programs</div>
+        <div class="cert-details">
+          Completed 07/27/2023
+        </div>
+      </div>
+    </section>
 
-    <div class="section">
-      <h3>EDUCATION</h3>
-      <p>High School Diploma – Penn Foster</p>
-    </div>
+    <!-- Education -->
+    <section class="section">
+      <h3 class="section-title">Education</h3>
+      <div class="cert-item">
+        <div class="cert-title">High School Diploma</div>
+        <div class="cert-details">Penn Foster</div>
+      </div>
+    </section>
   </div>
 </body>
 </html>
